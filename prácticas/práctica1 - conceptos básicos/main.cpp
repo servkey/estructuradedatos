@@ -158,7 +158,7 @@ int main(int argc, char** argv) {
 		apuntador++;
 		indice++;
 	}
-	*/
+
 	int y = 150;
 	
 	int *ay; //?¡?¡?
@@ -182,7 +182,7 @@ int main(int argc, char** argv) {
 	cout << "Dirección de memoria de ax: " << &ax << endl;
 	
 	cout << "Contenido de la variable apuntador ax: " << *ax << endl;
-	cout << "Contenido de la variable apuntador ax: " << a102 << endl;
+	cout << "Contenido de la variable apuntador ax: " << x << endl;
 	
 	cout<< "sizeof de arreglo (bytes): " << sizeof(arreglo) << endl;
 	cout<< "sizeof de un elemento del arreglo (bytes): " << sizeof(arreglo[0]) << endl;
@@ -198,7 +198,7 @@ int main(int argc, char** argv) {
 	
 	cout << "El número mayor del arreglo es: " << elemento << endl;
 	
-	
+*/	
 	/*
 	double a = 10;
 	cout << "Tamaño del double (bytes): " << sizeof(a) << endl;
