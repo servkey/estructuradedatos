@@ -156,8 +156,12 @@ class Ferrocarril{
 	private: string maquinista;
 	
 	//Relación de agregación
-	private: Cola<Vagon> *vagones = new Cola<Vagon>();
+	private: Cola<Vagon> *vagones;
 	private: int contador;
+	
+	public: Ferrocarril(){
+		vagones = new Cola<Vagon>();
+	}
 	
 	public: string getNombre(){
 		return nombre;
