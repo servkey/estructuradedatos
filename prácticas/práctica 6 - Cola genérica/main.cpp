@@ -1,32 +1,53 @@
 #include <iostream>
 using namespace std;
+
+class Persona{
+	private:
+		string nombre;
+		string apPaterno;
+		
+	public:
+		Persona(){
+			
+		}
+		
+		Persona(string nombre, string apPaterno){
+			this->nombre = nombre;
+			this->apPaterno = apPaterno;
+		}
+		
+		string getNombre(){
+			return nombre;
+		}
+};
+template <typename T>
 class Nodo{
-	private: int dato;
+	private: T dato;
 	private: Nodo *siguiente;
 	
-	public: void setDato(int dato){
+	public: void setDato(T dato){
 		this->dato = dato;	
 	}
 	
-	public: int getDato(){
+	public: T getDato(){
 		return this->dato;
 	}
 	
 	public: void setSiguiente(Nodo *siguiente){
 		this->siguiente = siguiente;
-	}	
-	
+	}		
 	public: Nodo* getSiguiente(){
 		return siguiente;
 	}		
 };
 
+template <typename T>
 class Cola{
-	private: Nodo *cabeza;
-	private: Nodo *ultimo;
+	private: Nodo<T> *cabeza;
+	private: Nodo<T> *ultimo;
 	
-	public: int getDato(){
-		int resultado = -1;
+	public: T getDato(){
+		T resultado = -1;
 		if (cabeza)
 		{
 			resultado = cabeza->getDato();
@@ -36,9 +57,9 @@ class Cola{
 		return resultado;
 	}
 	
-	public: bool insertar(int dato){
-		int resultado = false;
-		Nodo *nodo = new Nodo();
+	public: bool insertar(T dato){
+		bool resultado = false;
+		Nodo<T> *nodo = new Nodo<T>();
 		nodo->setDato(dato);
 		if (ultimo){
 			ultimo->setSiguiente(nodo);
@@ -52,7 +73,7 @@ class Cola{
 	
 	public: void mostrar(){
 		if (cabeza){
-			Nodo *posicion = cabeza;
+			Nodo<T> *posicion = cabeza;
 			while (posicion){
 				cout << posicion->getDato() << ", ";
 				posicion = posicion->getSiguiente();
@@ -64,11 +85,11 @@ class Cola{
 		}
 	}
 
-	public: int atender(){
-		int resultado = -1;
+	public: T atender(){
+		T resultado;
 		if (cabeza){
 			resultado = cabeza->getDato();
-			Nodo *enAtencion = cabeza;
+			Nodo<T> *enAtencion = cabeza;
 			cabeza = cabeza->getSiguiente();
 			delete enAtencion; 
 		}else{
@@ -80,7 +101,7 @@ class Cola{
 	public: int contar(){
 		int elementos = 0;
 		if (cabeza){
-			Nodo *posicion = cabeza;
+			Nodo<T> *posicion = cabeza;
 			while (posicion){
 				posicion = posicion->getSiguiente();
 				elementos++;
@@ -88,6 +109,25 @@ class Cola{
 		}
 		return elementos;
 	}
+
+
+	public: T get(int index){
+		int indexTmp = 0;
+		T resultado;
+		if (cabeza){
+			Nodo<T> *posicion = cabeza;
+			while (posicion){
+				if (index == indexTmp){
+					resultado = posicion->getDato();
+					break;
+				}
+				posicion = posicion->getSiguiente();
+				indexTmp++;
+			}
+		}
+		return resultado;
+	}
+
 	
 	public: estaVacia(){
 		bool resultado = true;
@@ -100,7 +140,7 @@ class Cola{
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char** argv) {
-	Cola *cola = new Cola();
+	Cola<int> *cola = new Cola<int>();
 	cout << "Insertando 10 a la cola" << endl;
 	cola->insertar(10);
 	cout << "Insertando 11 a la cola" << endl;	
@@ -131,5 +171,24 @@ int main(int argc, char** argv) {
 	cout << "Atendiendo: " << cola->atender() << endl;
 	
 	cola->mostrar();
+	
+	cout<<"Cola de personas: "<< endl;
+	Cola<Persona> *colaP = new Cola<Persona>();
+	Persona *p1 = new Persona("X1","Y1");
+	Persona *p2 = new Persona("X2","Y2");
+	Persona *p3 = new Persona("X3","Y3");
+	Persona *p4 = new Persona("X4","Y4");
+	colaP->insertar(*p1);
+	colaP->insertar(*p2);
+	colaP->insertar(*p3);
+	colaP->insertar(*p4);
+		
+	Persona ptmp = colaP->atender();
+	cout<< "Elemento atendido:" << ptmp.getNombre() << endl;	
+
+	for (int i = 0; i < colaP->contar(); i++){
+		cout<<"Nombre: " << colaP->get(i).getNombre() << endl;
+	}
+	
 	return 0;
 }
