@@ -98,9 +98,40 @@ class Cola{
 	}
 };
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
+int obtenerMenor(int a[], int n, int i, int valor){
+	if (i < n){
+		if(a[i] < valor){
+			valor = a[i];
+		}
+		i++;
+		obtenerMenor(a, n, i, valor);
+	}
+	return valor;
+}
 int main(int argc, char** argv) {
+	int a[] = {10,22,2,34,41,3};
+	cout << "El menor es " << obtenerMenor(a, 5, 0, a[0]) << endl;
+	
 	Cola *cola = new Cola();
+	cola->insertar(10);
+	cola->insertar(20);
+	cola->insertar(50);
+	cout<<cola->getDato() <<endl;
+	cola->atender();
+	cout<<cola->getDato() << endl;
+	cola->insertar(60);
+	cola->insertar(70);
+	cola->atender();
+	cola->insertar(80);
+	cout<<cola->getDato() << endl;
+	cola->atender();
+	cola->atender();
+	cola->atender();
+	cout<<cola->getDato() << endl;
+	cout<<"La cola está vacia: " << cola->getDato() << endl;
+	cout<<"************************" << endl;
+	
+	
 	cout << "Insertando 10 a la cola" << endl;
 	cola->insertar(10);
 	cout << "Insertando 11 a la cola" << endl;	
