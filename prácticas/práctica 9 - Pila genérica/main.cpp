@@ -265,7 +265,7 @@ int main(int argc, char** argv) {
 	cout << "Atendiendo: " << pila->sacar() << endl;
 	pila->mostrar();
 	
-	string expr = "(10+49)+19*2";
+	string expr = "(2+4)+1*2";
 	cout<<"Evaluando : " << expr << endl;
 	EvaluacionExpresion *ev1 = new EvaluacionExpresion(expr);
 	ev1->iterarCadena();
